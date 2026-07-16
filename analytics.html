@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analytics · Finance Dashboard</title>
+<meta name="description" content="Spending trends, category breakdowns, and period-over-period comparisons.">
+<meta name="theme-color" content="#1E6E52">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/dark.css">
+<script src="js/utils.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/theme.js"></script>
+</head>
+<body data-page="analytics">
+
+<svg style="display:none" aria-hidden="true">
+  <symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9a1 1 0 0 0 1 1h3v-6h4v6h3a1 1 0 0 0 1-1v-9"/></symbol>
+  <symbol id="icon-bar-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="20" x2="5" y2="12"/><line x1="12" y1="20" x2="12" y2="6"/><line x1="19" y1="20" x2="19" y2="15"/></symbol>
+  <symbol id="icon-file-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M15 3v5h5"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></symbol>
+  <symbol id="icon-sliders" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><circle cx="9" cy="6" r="2"/><line x1="4" y1="12" x2="20" y2="12"/><circle cx="15" cy="12" r="2"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="7" cy="18" r="2"/></symbol>
+  <symbol id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.6" y2="6.6"/><line x1="17.4" y1="17.4" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.6" y2="17.4"/><line x1="17.4" y1="6.6" x2="19.1" y2="4.9"/></symbol>
+  <symbol id="icon-moon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" fill="currentColor"/><circle cx="16" cy="9" r="6" fill="var(--color-sidebar-bg)"/></symbol>
+  <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></symbol>
+  <symbol id="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+  <symbol id="icon-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
+  <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+  <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></symbol>
+  <symbol id="icon-wallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M15 14h3"/></symbol>
+  <symbol id="icon-trending-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 16 10 10 14 14 20 6"/><polyline points="14 6 20 6 20 12"/></symbol>
+  <symbol id="icon-trending-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 8 10 14 14 10 20 18"/><polyline points="14 18 20 18 20 12"/></symbol>
+  <symbol id="icon-percent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="19" x2="19" y2="5"/><circle cx="7" cy="7" r="2.2"/><circle cx="17" cy="17" r="2.2"/></symbol>
+  <symbol id="icon-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 20h14"/></symbol>
+  <symbol id="icon-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V9"/><polyline points="7 14 12 9 17 14"/><path d="M5 4h14"/></symbol>
+  <symbol id="icon-inbox" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h4l2 3h4l2-3h4"/><path d="M4 12 5.5 5a1 1 0 0 1 1-.8h11a1 1 0 0 1 1 .8L20 12v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Z"/></symbol>
+  <symbol id="icon-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.5-6 8-6s8 2 8 6"/></symbol>
+  <symbol id="icon-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 21 11 12.5 19.5a2 2 0 0 1-2.8 0L3 12.8V4a1 1 0 0 1 1-1Z"/><circle cx="7.5" cy="7.5" r="1.3" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="icon-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="icon-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="8" ry="3"/><path d="M4 5.5V12c0 1.7 3.6 3 8 3s8-1.3 8-3V5.5"/><path d="M4 12v6.5c0 1.7 3.6 3 8 3s8-1.3 8-3V12"/></symbol>
+</svg>
+
+<div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__brand">
+      <img src="assets/favicon.svg" alt="" class="sidebar__logo">
+      <span class="sidebar__brand-name">Ledger<span>.</span></span>
+    </div>
+    <nav class="sidebar__nav">
+      <a href="index.html" class="nav-link"><svg class="icon"><use href="#icon-home"></use></svg>Dashboard</a>
+      <a href="analytics.html" class="nav-link is-active"><svg class="icon"><use href="#icon-bar-chart"></use></svg>Analytics</a>
+      <a href="reports.html" class="nav-link"><svg class="icon"><use href="#icon-file-list"></use></svg>Reports</a>
+      <a href="settings.html" class="nav-link"><svg class="icon"><use href="#icon-sliders"></use></svg>Settings</a>
+    </nav>
+    <div class="sidebar__footer">
+      <button type="button" class="theme-toggle">
+        <svg class="icon icon-sun"><use href="#icon-sun"></use></svg>
+        <svg class="icon icon-moon"><use href="#icon-moon"></use></svg>
+        <span>Toggle theme</span>
+      </button>
+      <span class="sidebar__version">v1.0 · Local data only</span>
+    </div>
+  </aside>
+
+  <div class="app-main">
+    <header class="topbar">
+      <button type="button" class="topbar__menu-btn" aria-label="Open menu"><svg class="icon"><use href="#icon-menu"></use></svg></button>
+      <div class="topbar__title">
+        <h1>Analytics</h1>
+        <p class="topbar__subtitle">Deeper insight into where your money goes.</p>
+      </div>
+    </header>
+
+    <main class="page-content">
+
+      <section class="page-section">
+        <div class="page-section__head">
+          <h2>Period Overview</h2>
+          <div class="range-group">
+            <button type="button" data-range="1">1M</button>
+            <button type="button" data-range="3" class="is-active">3M</button>
+            <button type="button" data-range="6">6M</button>
+            <button type="button" data-range="12">1Y</button>
+            <button type="button" data-range="all">All</button>
+          </div>
+        </div>
+        <div class="grid grid-cols-4">
+          <div class="stat-card stat-card--income">
+            <div class="stat-card__label"><span>Total Income</span><svg><use href="#icon-trending-up"></use></svg></div>
+            <span class="stat-card__value num" id="an-income">$0.00</span>
+            <div class="stat-card__delta" id="an-delta-income" hidden></div>
+          </div>
+          <div class="stat-card stat-card--expense">
+            <div class="stat-card__label"><span>Total Expenses</span><svg><use href="#icon-trending-down"></use></svg></div>
+            <span class="stat-card__value num" id="an-expense">$0.00</span>
+            <div class="stat-card__delta" id="an-delta-expense" hidden></div>
+          </div>
+          <div class="stat-card stat-card--balance">
+            <div class="stat-card__label"><span>Net Savings</span><svg><use href="#icon-wallet"></use></svg></div>
+            <span class="stat-card__value num" id="an-net">$0.00</span>
+          </div>
+          <div class="stat-card stat-card--savings">
+            <div class="stat-card__label"><span>Savings Rate</span><svg><use href="#icon-percent"></use></svg></div>
+            <span class="stat-card__value num" id="an-savings">0%</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section">
+        <div class="chart-row">
+          <div class="chart-card">
+            <div class="chart-card__head"><div><h3>Income vs. Expenses</h3><p class="text-muted">Selected period, by month</p></div></div>
+            <div class="chart-card__body"><canvas id="analytics-trend-chart"></canvas></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-card__head"><div><h3>Expense Breakdown</h3><p class="text-muted">Selected period</p></div></div>
+            <div class="chart-card__body">
+              <div class="donut-wrapper" id="analytics-donut-wrap">
+                <canvas id="analytics-donut"></canvas>
+                <div class="donut-center"><div class="donut-center__value">$0.00</div><div class="donut-center__label">Total</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section">
+        <div class="two-col">
+          <div class="chart-card">
+            <div class="chart-card__head"><div><h3>Top Expense Categories</h3></div></div>
+            <div class="rank-list" id="top-expense-categories"></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-card__head"><div><h3>Top Income Sources</h3></div></div>
+            <div class="rank-list" id="top-income-sources"></div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<div class="toast-container" id="toast-container"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.umd.min.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/analytics.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
