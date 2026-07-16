@@ -1,0 +1,31 @@
+:root[data-theme="dark"] {
+  --color-primary: #4CAF8C;
+  --color-primary-strong: #6FC6A6;
+  --color-primary-soft: rgba(76, 175, 140, 0.16);
+  --color-success: #4CAF8C;
+  --color-success-soft: rgba(76, 175, 140, 0.16);
+  --color-danger: #E07A66;
+  --color-danger-soft: rgba(224, 122, 102, 0.14);
+  --color-warning: #D9A94D;
+  --color-warning-soft: rgba(217, 169, 77, 0.14);
+
+  --color-bg: #101E18;
+  --color-surface: #172820;
+  --color-surface-alt: #1D3226;
+  --color-border: #2A4235;
+  --color-text: #EAF1EC;
+  --color-text-secondary: #A9BBB1;
+  --color-text-muted: #71887C;
+
+  --color-sidebar-bg: #0C1712;
+  --color-sidebar-border: rgba(255, 255, 255, 0.06);
+  --color-sidebar-active: rgba(255, 255, 255, 0.07);
+}
+
+:root[data-theme="dark"] .icon-sun { display: block; }
+:root[data-theme="dark"] .icon-moon { display: none; }
+
+:root[data-theme="dark"] .modal-overlay { background: rgba(0, 0, 0, 0.65); }
+:root[data-theme="dark"] .toast { color: var(--color-bg); }
+:root[data-theme="dark"] .sidebar { box-shadow: none; }
+:root[data-theme="dark"] ::-webkit-scrollbar-thumb { background: var(--color-border); }
